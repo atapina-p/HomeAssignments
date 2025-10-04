@@ -1,7 +1,7 @@
 /*
 * Polina Atapina
 * st139859@spbu.ru
-* My project number null
+* My project number one
 */
 
 #include "hello.h"
