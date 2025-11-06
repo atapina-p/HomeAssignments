@@ -1,3 +1,9 @@
+/*
+* Polina Atapina
+* st139859@student.spbu.ru
+* My project 3
+*/
+
 #ifndef SCOUT
 #define SCOUT
 #include <string>

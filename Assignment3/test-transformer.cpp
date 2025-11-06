@@ -1,3 +1,9 @@
+/*
+* Polina Atapina
+* st139859@student.spbu.ru
+* My project 3
+*/
+
 #include "gtest/gtest.h"
 
 #include "Transformer.h"

@@ -1,3 +1,9 @@
+/*
+* Polina Atapina
+* st139859@student.spbu.ru
+* My project 3
+*/
+
 #ifndef TRANSFORMER
 #define TRANSFORMER
 #include <iostream>
