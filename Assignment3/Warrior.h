@@ -1,0 +1,23 @@
+#ifndef WARRIOR
+#define WARRIOR
+#include <string>
+#include <iostream>
+#include "Transformer.h"
+
+class Warrior: public Transformer {
+    public:
+        Warrior(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon weapon, int armor, int rage);
+
+        void furiousStrike();
+
+        // Getters
+        int getArmor();
+        int getRage();
+        // Setters
+        void setArmor(int newArmor);
+        void setRage(int newRage);
+    private:
+        int _armor;
+        int _rage;
+};
+#endif
