@@ -12,7 +12,9 @@
 
 class Scout: public Transformer {
     public:
-        Scout(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon weapon, int speed, int cloakLevel, int scanRange);
+        Scout(std::string name, int health, int energy, 
+            bool isTransformed, PrimaryWeapon weapon, 
+            int speed, int cloakLevel, int scanRange);
 
         void cloak();
         void scanArea();

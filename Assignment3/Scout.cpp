@@ -16,12 +16,12 @@ Scout::Scout(std::string name, int health, int energy, bool isTransformed,
 
 
 void Scout::cloak(){
-    if (getEnergy() > 0) std::cout << getName() << " disguised for " << _cloakLevel << " level" << std::endl;
-    else std::cout << getName() << " is exhausted, didn't disguise" << std::endl;
+    if (getEnergy() > 0) std::cout << getName() << " disguised for " << _cloakLevel << " level\n";
+    else std::cout << getName() << " is exhausted, didn't disguise\n";
 }
 
 void Scout::scanArea(){
-    std::cout << "Scaned " << 3.14*_scanRange*_scanRange << " miles" << std::endl;
+    std::cout << "Scaned " << abs(3*_scanRange*_scanRange) << " miles\n";
 }
 
 // Getters

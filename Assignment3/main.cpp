@@ -13,8 +13,7 @@
 
 
 int main(){
-    PrimaryWeapon bomb(1000);
-    AerialBot robot("Vector", 100, 100, false, bomb, 20, 10);
-    robot.evasiveManeuvers();
-    robot.bombard();
+    PrimaryWeapon weapon(25);
+    Scout scout("Optimus", 100, 100, false, weapon, 50, 10, 7);
+    scout.scanArea();
 }
