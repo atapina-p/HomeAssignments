@@ -13,7 +13,7 @@ LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
 DEPS=$(wildcard *.h)
 
 OBJ=Transformer.o PrimaryWeapon.o SparkCore.o Scout.o Warrior.o AerialBot.o
-TEST-OBJ=test-transformer.o test-scout.o test-warrior.o
+TEST-OBJ=test-transformer.o test-scout.o test-warrior.o test-aerialbot.o
 
 .PHONY: default
 

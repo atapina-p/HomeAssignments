@@ -16,7 +16,7 @@ AerialBot::AerialBot(std::string name, int health, int energy, bool isTransforme
 
 void AerialBot::evasiveManeuvers(){
     _flightSpeed += 10;
-    std::cout << "Now flight speed is " << _flightSpeed << std::endl;
+    std::cout << "Now flight speed is " << _flightSpeed << "\n";
 }
 
 void AerialBot::bombard(){
