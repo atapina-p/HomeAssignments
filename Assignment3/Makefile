@@ -1,18 +1,45 @@
 PROJECT = transformer
-CXX = g++
-CXXFLAGS = -Wall -Wextra
-SRC = main.cpp Transformer.cpp SparkCore.cpp PrimaryWeapon.cpp
-OBJ = $(SRC:.cpp=.o)
+LIBPROJECT = $(PROJECT).a
+TESTPROJECT = test-$(PROJECT)
 
-.PHONY: all clean
+CXX = g++
+A = ar
+AFLAGS = rsv
+
+CCXFLAGS = -I. -std=c++17 -Wall -g -fPIC
+LDXXFLAGS = $(CCXFLAGS) -L. -l:$(LIBPROJECT)
+LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
+
+DEPS=$(wildcard *.h)
+
+OBJ=Transformer.o PrimaryWeapon.o SparkCore.o
+TEST-OBJ=test-transformer.o
+
+.PHONY: default
+
+default: all;
+
+%.o: %.cpp $(DEPS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
+
+$(LIBPROJECT): $(OBJ)
+	$(A) $(AFLAGS) $@ $^
+
+$(PROJECT): main.o $(LIBPROJECT)
+	$(CXX) -o $@ main.o $(LDXXFLAGS)
+
+
+$(TESTPROJECT): $(LIBPROJECT) $(TEST-OBJ)
+	$(CXX) -o $@ $(TEST-OBJ) $(LDGTESTFLAGS)
+
+test: $(TESTPROJECT)
 
 all: $(PROJECT)
 
-$(PROJECT): $(OBJ)
-	$(CXX) -o $@ $^ $(CXXFLAGS)
-
-%.o: %.cpp
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
+.PHONY: clean
 
 clean:
-	rm -f $(OBJ) $(PROJECT)
+	rm -f *.o
+	rm -f $(PROJECT)
+	rm -f $(LIBPROJECT)
+	rm -f $(TESTPROJECT)
