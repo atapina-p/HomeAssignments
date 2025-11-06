@@ -15,7 +15,7 @@ Warrior::Warrior(std::string name, int health, int energy, bool isTransformed,
 
 
 void Warrior::furiousStrike(){
-    std::cout << _rage*getEnergy() << std::endl;
+    std::cout << _rage*getEnergy() << "\n";
 }
 
 
