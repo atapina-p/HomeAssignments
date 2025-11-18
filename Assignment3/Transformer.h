@@ -14,7 +14,7 @@
 
 class Transformer {
     public:
-        Transformer(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon weapon);
+        Transformer(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon);
         ~Transformer();
         
         void transform();
@@ -26,7 +26,7 @@ class Transformer {
         int getHealth();
         int getEnergy();
         bool getIsTransformed();
-        int getWeaponInfo();
+        PrimaryWeapon* getWeaponInfo();
         std::string getStatusSpark();
 
 
@@ -35,7 +35,7 @@ class Transformer {
         void setHealth(int newHealth);
         void setEnergy(int newEnergy);
         void setIsTransformed(bool newTransformed);
-        void setWeapon(int weaponDamage);
+        void setWeapon(PrimaryWeapon* weapon);
         void setStatusSpark(std::string newSpark);
         
     private:
@@ -43,7 +43,7 @@ class Transformer {
         int _health;
         int _energy;
         bool _isTransformed;
-        PrimaryWeapon _weapon; // association
+        PrimaryWeapon* _weapon; // association
         SparkCore _robotSpark; // composition
 };
 

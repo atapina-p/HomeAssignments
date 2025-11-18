@@ -12,7 +12,7 @@
 
 class AerialBot: public Transformer {
     public:
-        AerialBot(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon weapon, int flightSpeed, int altitude);
+        AerialBot(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon, int flightSpeed, int altitude);
 
         void evasiveManeuvers();
         void bombard();

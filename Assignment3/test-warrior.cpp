@@ -11,7 +11,7 @@
 // Constructor
 TEST(WarriorTest, ConstructorTest) {
     PrimaryWeapon weapon(25);
-    Warrior warrior("Optimus", 100, 100, false, weapon, 10, 6);
+    Warrior warrior("Optimus", 100, 100, false, &weapon, 10, 6);
     EXPECT_EQ(warrior.getArmor(), 10);
     EXPECT_EQ(warrior.getRage(), 6);
 }
@@ -19,13 +19,13 @@ TEST(WarriorTest, ConstructorTest) {
 // Setters and getters
 TEST(WarriorTest, SetGetArmor) {
     PrimaryWeapon weapon(25);
-    Warrior warrior("Optimus", 100, 100, false, weapon, 10, 6);
+    Warrior warrior("Optimus", 100, 100, false, &weapon, 10, 6);
     warrior.setArmor(37);
     EXPECT_EQ(warrior.getArmor(), 37);
 }
 TEST(WarriorTest, SetGetRage) {
     PrimaryWeapon weapon(25);
-    Warrior warrior("Optimus", 100, 100, false, weapon, 10, 6);
+    Warrior warrior("Optimus", 100, 100, false, &weapon, 10, 6);
     warrior.setRage(4);
     EXPECT_EQ(warrior.getRage(), 4);
 }
@@ -34,7 +34,7 @@ TEST(WarriorTest, SetGetRage) {
 // Methods
 TEST(WarriorTest, StrikeTest) {
     PrimaryWeapon weapon(25);
-    Warrior warrior("Optimus", 100, 100, false, weapon, 10, 6);
+    Warrior warrior("Optimus", 100, 100, false, &weapon, 10, 6);
     std::ostringstream buffer; 
     std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
     warrior.furiousStrike();

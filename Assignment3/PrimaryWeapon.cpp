@@ -8,6 +8,8 @@
 
 PrimaryWeapon::PrimaryWeapon(int damage): _damage(damage){};
 
+PrimaryWeapon::~PrimaryWeapon(){};
+
 
 void PrimaryWeapon::changeDamage(int newDamage){
     _damage = abs(newDamage);

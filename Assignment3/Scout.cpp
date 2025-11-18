@@ -8,7 +8,7 @@
 #include "Scout.h"
 
 Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
-    PrimaryWeapon weapon, int speed, int cloakLevel, int scanRange):
+    PrimaryWeapon* weapon, int speed, int cloakLevel, int scanRange):
     Transformer(name, health, energy, isTransformed, weapon),
     _speed(speed),
     _cloakLevel(cloakLevel),

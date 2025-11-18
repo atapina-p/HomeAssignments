@@ -9,7 +9,7 @@
 #include "SparkCore.h"
 
 
-Transformer::Transformer(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon weapon): 
+Transformer::Transformer(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon): 
     _name(name),
     _health(health),
     _energy(energy),
@@ -42,8 +42,8 @@ int Transformer::getEnergy(){
 bool Transformer::getIsTransformed(){
     return _isTransformed;
 }
-int Transformer::getWeaponInfo(){
-    return _weapon.getDamageInfo();
+PrimaryWeapon* Transformer::getWeaponInfo(){
+    return _weapon;
 }
 std::string Transformer::getStatusSpark(){
     return _robotSpark.getStatus();
@@ -63,8 +63,8 @@ void Transformer::setEnergy(int newEnergy){
 void Transformer::setIsTransformed(bool newTransformed){
     _isTransformed = newTransformed;
 }
-void Transformer::setWeapon(int weaponDamage){
-    _weapon.changeDamage(weaponDamage);
+void Transformer::setWeapon(PrimaryWeapon* weapon){
+    _weapon = weapon;
 }
 void Transformer::setStatusSpark(std::string newSpark){
     _robotSpark.changeStatus(newSpark);

@@ -11,7 +11,7 @@
 // Constructor
 TEST(ScoutTest, ConstructorTest) {
     PrimaryWeapon weapon(25);
-    Scout scout("Optimus", 100, 100, false, weapon, 50, 10, 7);
+    Scout scout("Optimus", 100, 100, false, &weapon, 50, 10, 7);
     EXPECT_EQ(scout.getSpeed(), 50);
     EXPECT_EQ(scout.getCloakLevel(), 10);
     EXPECT_EQ(scout.getScanRange(), 7);
@@ -20,19 +20,19 @@ TEST(ScoutTest, ConstructorTest) {
 // Setters and getters
 TEST(ScoutTest, SetGetSpeed) {
     PrimaryWeapon weapon(25);
-    Scout scout("Optimus", 100, 100, false, weapon, 50, 10, 7);
+    Scout scout("Optimus", 100, 100, false, &weapon, 50, 10, 7);
     scout.setSpeed(64);
     EXPECT_EQ(scout.getSpeed(), 64);
 }
 TEST(ScoutTest, SetGetCloakLevel) {
     PrimaryWeapon weapon(25);
-    Scout scout("Optimus", 100, 100, false, weapon, 50, 10, 7);
+    Scout scout("Optimus", 100, 100, false, &weapon, 50, 10, 7);
     scout.setCloakLevel(16);
     EXPECT_EQ(scout.getCloakLevel(), 16);
 }
 TEST(ScoutTest, SetGetScanRange) {
     PrimaryWeapon weapon(25);
-    Scout scout("Optimus", 100, 100, false, weapon, 50, 10, 7);
+    Scout scout("Optimus", 100, 100, false, &weapon, 50, 10, 7);
     scout.setScanRange(16);
     EXPECT_EQ(scout.getScanRange(), 16);
 }
@@ -40,7 +40,7 @@ TEST(ScoutTest, SetGetScanRange) {
 // Methods
 TEST(ScoutTest, CloakMethodTest_1) {
     PrimaryWeapon weapon(25);
-    Scout scout("Optimus", 100, 100, false, weapon, 50, 10, 7);
+    Scout scout("Optimus", 100, 100, false, &weapon, 50, 10, 7);
     std::ostringstream buffer; 
     std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
     scout.cloak();
@@ -49,7 +49,7 @@ TEST(ScoutTest, CloakMethodTest_1) {
 }
 TEST(ScoutTest, CloakMethodTest_2) {
     PrimaryWeapon weapon(25);
-    Scout scout("Optimus", 100, 0, false, weapon, 50, 10, 7);
+    Scout scout("Optimus", 100, 0, false, &weapon, 50, 10, 7);
     std::ostringstream buffer; 
     std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
     scout.cloak();
@@ -59,7 +59,7 @@ TEST(ScoutTest, CloakMethodTest_2) {
 
 TEST(ScoutTest, ScanMethodTest) {
     PrimaryWeapon weapon(25);
-    Scout scout("Optimus", 100, 100, false, weapon, 50, 10, 7);
+    Scout scout("Optimus", 100, 100, false, &weapon, 50, 10, 7);
     std::ostringstream buffer; 
     std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
     scout.scanArea();

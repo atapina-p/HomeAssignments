@@ -8,7 +8,7 @@
 #include "Warrior.h"
 
 Warrior::Warrior(std::string name, int health, int energy, bool isTransformed, 
-    PrimaryWeapon weapon, int armor, int rage):
+    PrimaryWeapon* weapon, int armor, int rage):
     Transformer(name, health, energy, isTransformed, weapon),
     _armor(armor),
     _rage(rage){};

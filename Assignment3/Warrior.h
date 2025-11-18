@@ -12,7 +12,7 @@
 
 class Warrior: public Transformer {
     public:
-        Warrior(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon weapon, int armor, int rage);
+        Warrior(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon, int armor, int rage);
 
         void furiousStrike();
 

@@ -11,6 +11,7 @@
 class PrimaryWeapon {
     public:
         PrimaryWeapon(int damage);
+        ~PrimaryWeapon();
         // Getters
         int getDamageInfo();
         // Setters
