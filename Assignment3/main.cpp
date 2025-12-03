@@ -12,8 +12,12 @@
 
 
 
-int main(){
+int main()
+{
     PrimaryWeapon weapon(25);
-    Scout scout("Optimus", 100, 100, false, &weapon, 50, 10, 7);
-    scout.scanArea();
+    Transformer t("Optimus", 100, 100, false, &weapon);
+    AerialBot bot("Optimus", 100, 100, false, &weapon, 12, 35);
+    Scout sc("Optimus", 100, 100, false, &weapon, 12, 35, 10);
+    Warrior warrior("Optimus", 100, 100, false, &weapon, 12, 35);
+    std::cout << warrior;
 }

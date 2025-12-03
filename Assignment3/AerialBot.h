@@ -14,6 +14,8 @@ class AerialBot: public Transformer {
     public:
         AerialBot(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon, int flightSpeed, int altitude);
 
+        friend std::ostream& operator<<(std::ostream& os, AerialBot& bot);
+
         void evasiveManeuvers();
         void bombard();
 

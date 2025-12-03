@@ -16,6 +16,8 @@ class Transformer {
     public:
         Transformer(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon);
         ~Transformer();
+
+        friend std::ostream& operator<<(std::ostream& os, Transformer& transformer); //output
         
         void transform();
         void fight();

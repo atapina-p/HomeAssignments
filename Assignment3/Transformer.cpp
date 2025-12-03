@@ -20,6 +20,18 @@ Transformer::Transformer(std::string name, int health, int energy, bool isTransf
 Transformer::~Transformer(){};
 
 
+std::ostream& operator<<(std::ostream& os, Transformer& transformer)
+{
+    os<<"Transformer " << transformer.getName() << "\n"
+    << "Health: " << transformer.getHealth() << "\n"
+    << "Energy: " << transformer.getEnergy() << "\n"
+    << "Transform status: " << transformer.getIsTransformed() << "\n"
+    << "Weapon: " << transformer.getWeaponInfo()->getDamageInfo() << "\n"
+    << "Spark core: " << transformer.getStatusSpark() << "\n";
+    return os;
+}
+
+
 void Transformer::fight(){
     if (_energy >= 10) _energy -= 10;
 }

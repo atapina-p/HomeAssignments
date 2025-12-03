@@ -14,6 +14,19 @@ AerialBot::AerialBot(std::string name, int health, int energy, bool isTransforme
     _altitude(altitude){};
 
 
+std::ostream& operator<<(std::ostream& os, AerialBot& bot)
+{
+    os << "Aerial bot " << bot.getName() << "\n"
+    << "Health: " << bot.getHealth() << "\n"
+    << "Energy: " << bot.getEnergy() << "\n"
+    << "Transform status: " << bot.getIsTransformed() << "\n"
+    << "Weapon: " << bot.getWeaponInfo()->getDamageInfo() << "\n"
+    << "Spark core: " << bot.getStatusSpark() << "\n"
+    << "Flight speed: " << bot.getFlightSpeed() << "\n"
+    << "Altitude: " << bot.getAltitude() << "\n";
+    return os;
+}
+
 void AerialBot::evasiveManeuvers(){
     _flightSpeed += 10;
     std::cout << "Now flight speed is " << _flightSpeed << "\n";

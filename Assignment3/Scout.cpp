@@ -15,6 +15,20 @@ Scout::Scout(std::string name, int health, int energy, bool isTransformed,
     _scanRange(scanRange){};
 
 
+std::ostream& operator<<(std::ostream& os, Scout& scout)
+{
+    os << "Scout " << scout.getName() << "\n"
+    << "Health: " << scout.getHealth() << "\n"
+    << "Energy: " << scout.getEnergy() << "\n"
+    << "Transform status: " << scout.getIsTransformed() << "\n"
+    << "Weapon: " << scout.getWeaponInfo()->getDamageInfo() << "\n"
+    << "Spark core: " << scout.getStatusSpark() << "\n"
+    << "Speed: " << scout.getSpeed() << "\n"
+    << "Cloak level: " << scout.getCloakLevel() << "\n"
+    << "Scan range: " << scout.getScanRange() << "\n";
+    return os;
+}
+
 void Scout::cloak(){
     if (getEnergy() > 0) std::cout << getName() << " disguised for " << _cloakLevel << " level\n";
     else std::cout << getName() << " is exhausted, didn't disguise\n";

@@ -15,6 +15,9 @@ class Scout: public Transformer {
         Scout(std::string name, int health, int energy, 
             bool isTransformed, PrimaryWeapon* weapon, 
             int speed, int cloakLevel, int scanRange);
+        
+
+        friend std::ostream& operator<<(std::ostream& os, Scout& scout);
 
         void cloak();
         void scanArea();

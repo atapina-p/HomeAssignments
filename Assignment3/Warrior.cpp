@@ -14,6 +14,20 @@ Warrior::Warrior(std::string name, int health, int energy, bool isTransformed,
     _rage(rage){};
 
 
+std::ostream& operator<<(std::ostream& os, Warrior& warrior)
+{
+    os << "Warrior " << warrior.getName() << "\n"
+    << "Health: " << warrior.getHealth() << "\n"
+    << "Energy: " << warrior.getEnergy() << "\n"
+    << "Transform status: " << warrior.getIsTransformed() << "\n"
+    << "Weapon: " << warrior.getWeaponInfo()->getDamageInfo() << "\n"
+    << "Spark core: " << warrior.getStatusSpark() << "\n"
+    << "Armor: " << warrior.getArmor() << "\n"
+    << "Rage: " << warrior.getRage() << "\n";
+    return os;
+}
+
+
 void Warrior::furiousStrike(){
     std::cout << _rage*getEnergy() << "\n";
 }
