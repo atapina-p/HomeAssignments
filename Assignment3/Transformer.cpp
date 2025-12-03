@@ -17,6 +17,37 @@ Transformer::Transformer(std::string name, int health, int energy, bool isTransf
     _weapon(weapon),
     _robotSpark("undefined"){};
 
+Transformer::Transformer(std::string name, int health, int energy, bool isTransformed): 
+    _name(name),
+    _health(health),
+    _energy(energy),
+    _isTransformed(isTransformed),
+    _weapon(new PrimaryWeapon(30)),
+    _robotSpark("undefined"){};
+
+Transformer::Transformer(std::string name, int health, int energy): 
+    _name(name),
+    _health(health),
+    _energy(energy),
+    _isTransformed(false),
+    _weapon(new PrimaryWeapon(30)),
+    _robotSpark("undefined"){};
+
+Transformer::Transformer(std::string name, int health): 
+    _name(name),
+    _health(health),
+    _energy(100),
+    _isTransformed(false),
+    _weapon(new PrimaryWeapon(30)),
+    _robotSpark("undefined"){};
+
+Transformer::Transformer(std::string name): 
+    _name(name),
+    _health(50),
+    _energy(100),
+    _isTransformed(false),
+    _weapon(new PrimaryWeapon(30)),
+    _robotSpark("undefined"){};
 Transformer::~Transformer(){};
 
 
@@ -31,7 +62,19 @@ std::ostream& operator<<(std::ostream& os, Transformer& transformer)
     return os;
 }
 
+void Transformer::fire(){
+    std::cout << "method 'fire' from Transformer\n";
+}
 
+void Transformer::scream(){
+    std::cout << "method 'scream' from Transformer\n";
+}
+
+void Transformer::speak(){
+    std::cout << "method 'speak' from Transformer\n";
+}
+
+//methods
 void Transformer::fight(){
     if (_energy >= 10) _energy -= 10;
 }

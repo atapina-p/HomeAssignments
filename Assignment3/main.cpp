@@ -15,9 +15,9 @@
 int main()
 {
     PrimaryWeapon weapon(25);
-    Transformer t("Optimus", 100, 100, false, &weapon);
-    AerialBot bot("Optimus", 100, 100, false, &weapon, 12, 35);
+    Transformer t("Optimus");
+    AerialBot bot("Optimus", 107);
     Scout sc("Optimus", 100, 100, false, &weapon, 12, 35, 10);
     Warrior warrior("Optimus", 100, 100, false, &weapon, 12, 35);
-    std::cout << warrior;
+    std::cout << bot;
 }

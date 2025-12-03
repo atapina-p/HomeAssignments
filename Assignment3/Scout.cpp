@@ -7,13 +7,34 @@
 #include "Transformer.h"
 #include "Scout.h"
 
+//Constructor
 Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
     PrimaryWeapon* weapon, int speed, int cloakLevel, int scanRange):
-    Transformer(name, health, energy, isTransformed, weapon),
-    _speed(speed),
-    _cloakLevel(cloakLevel),
-    _scanRange(scanRange){};
+    Transformer(name, health, energy, isTransformed, weapon), _speed(speed), _cloakLevel(cloakLevel), _scanRange(scanRange){};
 
+Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
+    PrimaryWeapon* weapon, int speed, int cloakLevel):
+    Transformer(name, health, energy, isTransformed, weapon), _speed(speed), _cloakLevel(cloakLevel), _scanRange(30){};
+
+Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
+    PrimaryWeapon* weapon, int speed):
+    Transformer(name, health, energy, isTransformed, weapon), _speed(speed), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
+    PrimaryWeapon* weapon):
+    Transformer(name, health, energy, isTransformed, weapon), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name, int health, int energy, bool isTransformed):
+    Transformer(name, health, energy, isTransformed), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name, int health, int energy):
+    Transformer(name, health, energy), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name, int health):
+    Transformer(name, health), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name):
+    Transformer(name), _speed(85), _cloakLevel(5), _scanRange(30){};
 
 std::ostream& operator<<(std::ostream& os, Scout& scout)
 {
@@ -28,6 +49,18 @@ std::ostream& operator<<(std::ostream& os, Scout& scout)
     << "Scan range: " << scout.getScanRange() << "\n";
     return os;
 }
+
+
+void Scout::fire(){
+    std::cout << "method 'fire' from Scout\n";
+}
+void Scout::speak(){
+    std::cout << "method 'speak' from Scout\n";
+}
+void Scout::scream(){
+    std::cout << "method 'scream' from Scout\n";
+}
+
 
 void Scout::cloak(){
     if (getEnergy() > 0) std::cout << getName() << " disguised for " << _cloakLevel << " level\n";

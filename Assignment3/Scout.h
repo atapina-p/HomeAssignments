@@ -12,13 +12,22 @@
 
 class Scout: public Transformer {
     public:
-        Scout(std::string name, int health, int energy, 
-            bool isTransformed, PrimaryWeapon* weapon, 
-            int speed, int cloakLevel, int scanRange);
+        Scout(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon, int speed, int cloakLevel, int scanRange);
+        Scout(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon, int speed, int cloakLevel);
+        Scout(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon, int speed);
+        Scout(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon);
+        Scout(std::string name, int health, int energy, bool isTransformed);
+        Scout(std::string name, int health, int energy);
+        Scout(std::string name, int health);
+        Scout(std::string name);
         
-
         friend std::ostream& operator<<(std::ostream& os, Scout& scout);
 
+        void fire() override;
+        void scream() override;
+        void speak() override;
+
+        //methods
         void cloak();
         void scanArea();
 

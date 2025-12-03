@@ -9,10 +9,27 @@
 
 AerialBot::AerialBot(std::string name, int health, int energy, bool isTransformed, 
     PrimaryWeapon* weapon, int flightSpeed, int altitude):
-    Transformer(name, health, energy, isTransformed, weapon),
-    _flightSpeed(flightSpeed),
-    _altitude(altitude){};
+    Transformer(name, health, energy, isTransformed, weapon), _flightSpeed(flightSpeed), _altitude(altitude){};
+    
+AerialBot::AerialBot(std::string name, int health, int energy, bool isTransformed, 
+    PrimaryWeapon* weapon, int flightSpeed):
+    Transformer(name, health, energy, isTransformed, weapon), _flightSpeed(flightSpeed), _altitude(5){};
 
+AerialBot::AerialBot(std::string name, int health, int energy, bool isTransformed, 
+    PrimaryWeapon* weapon):
+    Transformer(name, health, energy, isTransformed, weapon), _flightSpeed(85), _altitude(5){};
+
+AerialBot::AerialBot(std::string name, int health, int energy, bool isTransformed):
+    Transformer(name, health, energy, isTransformed), _flightSpeed(85), _altitude(5){};
+
+AerialBot::AerialBot(std::string name, int health, int energy):
+    Transformer(name, health, energy), _flightSpeed(85), _altitude(5){};
+
+AerialBot::AerialBot(std::string name, int health):
+    Transformer(name, health), _flightSpeed(85), _altitude(5){};
+
+AerialBot::AerialBot(std::string name):
+    Transformer(name), _flightSpeed(85), _altitude(5){};
 
 std::ostream& operator<<(std::ostream& os, AerialBot& bot)
 {
@@ -27,6 +44,20 @@ std::ostream& operator<<(std::ostream& os, AerialBot& bot)
     return os;
 }
 
+void AerialBot::speak(){
+    std::cout << "method 'speak' from AerialBot\n";
+}
+
+void AerialBot::scream(){
+    std::cout << "method 'scream' from AerialBot\n";
+}
+
+void AerialBot::fire(){
+    std::cout << "method 'fire' from AerialBot\n";
+}
+
+
+//methods
 void AerialBot::evasiveManeuvers(){
     _flightSpeed += 10;
     std::cout << "Now flight speed is " << _flightSpeed << "\n";

@@ -13,15 +13,29 @@
 
 
 class Transformer {
-    public:
-        Transformer(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon);
-        ~Transformer();
 
-        friend std::ostream& operator<<(std::ostream& os, Transformer& transformer); //output
+    friend class AerialBot;
+    friend class Scout;
+    friend class Warrior;
+
+    public:
+        Transformer(std::string name);
+        Transformer(std::string name, int health);
+        Transformer(std::string name, int health, int energy);
+        Transformer(std::string name, int health, int energy, bool isTransformed);
+        Transformer(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon);
+        virtual ~Transformer();
+
+        friend std::ostream& operator<<(std::ostream& os, Transformer& transformer); 
+
+        //virtual methods
+        virtual void fire(); //a purely virtual method
+        virtual void scream();
+        virtual void speak();
         
+        //methods
         void transform();
         void fight();
-
 
         // Getters
         std::string getName();
