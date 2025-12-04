@@ -44,16 +44,19 @@ std::ostream& operator<<(std::ostream& os, AerialBot& bot)
     return os;
 }
 
-void AerialBot::speak(){
+bool AerialBot::speak(){
     std::cout << "method 'speak' from AerialBot\n";
+    return true;
 }
 
-void AerialBot::scream(){
+bool AerialBot::scream(){
     std::cout << "method 'scream' from AerialBot\n";
+    return true;
 }
 
-void AerialBot::fire(){
+bool AerialBot::fire(){
     std::cout << "method 'fire' from AerialBot\n";
+    return true;
 }
 
 
@@ -64,7 +67,7 @@ void AerialBot::evasiveManeuvers(){
 }
 
 void AerialBot::bombard(){
-    std::cout << "Booom!" << std::endl;
+    std::cout << "Booom!\n";
 }
 
 

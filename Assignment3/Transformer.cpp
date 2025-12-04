@@ -62,16 +62,15 @@ std::ostream& operator<<(std::ostream& os, Transformer& transformer)
     return os;
 }
 
-void Transformer::fire(){
-    std::cout << "method 'fire' from Transformer\n";
-}
 
-void Transformer::scream(){
+bool Transformer::scream(){
     std::cout << "method 'scream' from Transformer\n";
+    return true;
 }
 
-void Transformer::speak(){
+bool Transformer::speak(){
     std::cout << "method 'speak' from Transformer\n";
+    return true;
 }
 
 //methods

@@ -22,9 +22,9 @@ class Warrior: public Transformer {
 
         friend std::ostream& operator<<(std::ostream& os, Warrior& warrior);
 
-        void fire() override;
-        void scream() override;
-        void speak() override;
+        bool fire() override;
+        bool scream() override;
+        bool speak() override;
 
         void furiousStrike();
 

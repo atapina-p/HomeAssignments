@@ -23,9 +23,9 @@ class Scout: public Transformer {
         
         friend std::ostream& operator<<(std::ostream& os, Scout& scout);
 
-        void fire() override;
-        void scream() override;
-        void speak() override;
+        bool fire() override;
+        bool scream() override;
+        bool speak() override;
 
         //methods
         void cloak();

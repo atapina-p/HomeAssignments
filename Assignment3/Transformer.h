@@ -29,9 +29,9 @@ class Transformer {
         friend std::ostream& operator<<(std::ostream& os, Transformer& transformer); 
 
         //virtual methods
-        virtual void fire(); //a purely virtual method
-        virtual void scream();
-        virtual void speak();
+        virtual bool fire() = 0; //a purely virtual method
+        virtual bool scream();
+        virtual bool speak();
         
         //methods
         void transform();

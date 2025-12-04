@@ -45,14 +45,17 @@ std::ostream& operator<<(std::ostream& os, Warrior& warrior)
 }
 
 
-void Warrior::fire(){
+bool Warrior::fire(){
     std::cout << "method 'fire' from Warrior\n";
+    return true;
 }
-void Warrior::speak(){
+bool Warrior::speak(){
     std::cout << "method 'speak' from Warrior\n";
+    return true;
 }
-void Warrior::scream(){
+bool Warrior::scream(){
     std::cout << "method 'scream' from Warrior\n";
+    return true;
 }
 
 //methods

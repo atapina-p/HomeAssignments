@@ -51,14 +51,17 @@ std::ostream& operator<<(std::ostream& os, Scout& scout)
 }
 
 
-void Scout::fire(){
+bool Scout::fire(){
     std::cout << "method 'fire' from Scout\n";
+    return true;
 }
-void Scout::speak(){
+bool Scout::speak(){
     std::cout << "method 'speak' from Scout\n";
+    return true;
 }
-void Scout::scream(){
+bool Scout::scream(){
     std::cout << "method 'scream' from Scout\n";
+    return true;
 }
 
 

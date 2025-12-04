@@ -22,9 +22,9 @@ class AerialBot: public Transformer {
 
         friend std::ostream& operator<<(std::ostream& os, AerialBot& bot);
 
-        void fire() override;
-        void scream() override;
-        void speak() override;
+        bool fire() override;
+        bool scream() override;
+        bool speak() override;
 
         //methods
         void evasiveManeuvers();
