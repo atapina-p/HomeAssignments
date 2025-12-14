@@ -6,14 +6,14 @@ CXX = g++
 A = ar
 AFLAGS = rsv
 
-CCXFLAGS = -I. -std=c++17 -Wall -g -fPIC
+CCXFLAGS = -I. -std=c++17 -Werror -Wpedantic -Wall -g -fPIC
 LDXXFLAGS = $(CCXFLAGS) -L. -l:$(LIBPROJECT)
 LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
 
 DEPS=$(wildcard *.h)
 
 OBJ=Transformer.o PrimaryWeapon.o SparkCore.o Scout.o Warrior.o AerialBot.o
-TEST-OBJ=test-transformer.o test-scout.o test-warrior.o test-aerialbot.o
+TEST-OBJ=test-transformer.o test-scout.o test-warrior.o test-aerialbot.o test-virtuals.o
 
 .PHONY: default
 

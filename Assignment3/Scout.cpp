@@ -7,12 +7,62 @@
 #include "Transformer.h"
 #include "Scout.h"
 
+//Constructor
 Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
     PrimaryWeapon* weapon, int speed, int cloakLevel, int scanRange):
-    Transformer(name, health, energy, isTransformed, weapon),
-    _speed(speed),
-    _cloakLevel(cloakLevel),
-    _scanRange(scanRange){};
+    Transformer(name, health, energy, isTransformed, weapon), _speed(speed), _cloakLevel(cloakLevel), _scanRange(scanRange){};
+
+Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
+    PrimaryWeapon* weapon, int speed, int cloakLevel):
+    Transformer(name, health, energy, isTransformed, weapon), _speed(speed), _cloakLevel(cloakLevel), _scanRange(30){};
+
+Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
+    PrimaryWeapon* weapon, int speed):
+    Transformer(name, health, energy, isTransformed, weapon), _speed(speed), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name, int health, int energy, bool isTransformed, 
+    PrimaryWeapon* weapon):
+    Transformer(name, health, energy, isTransformed, weapon), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name, int health, int energy, bool isTransformed):
+    Transformer(name, health, energy, isTransformed), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name, int health, int energy):
+    Transformer(name, health, energy), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name, int health):
+    Transformer(name, health), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+Scout::Scout(std::string name):
+    Transformer(name), _speed(85), _cloakLevel(5), _scanRange(30){};
+
+std::ostream& operator<<(std::ostream& os, Scout& scout)
+{
+    os << "Scout " << scout.getName() << "\n"
+    << "Health: " << scout.getHealth() << "\n"
+    << "Energy: " << scout.getEnergy() << "\n"
+    << "Transform status: " << scout.getIsTransformed() << "\n"
+    << "Weapon: " << scout.getWeaponInfo()->getDamageInfo() << "\n"
+    << "Spark core: " << scout.getStatusSpark() << "\n"
+    << "Speed: " << scout.getSpeed() << "\n"
+    << "Cloak level: " << scout.getCloakLevel() << "\n"
+    << "Scan range: " << scout.getScanRange() << "\n";
+    return os;
+}
+
+
+bool Scout::fire(){
+    std::cout << "method 'fire' from Scout\n";
+    return true;
+}
+bool Scout::speak(){
+    std::cout << "method 'speak' from Scout\n";
+    return true;
+}
+bool Scout::scream(){
+    std::cout << "method 'scream' from Scout\n";
+    return true;
+}
 
 
 void Scout::cloak(){

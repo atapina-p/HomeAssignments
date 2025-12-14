@@ -67,3 +67,41 @@ TEST(ScoutTest, ScanMethodTest) {
     EXPECT_EQ(buffer.str(), "Scaned 147 miles\n");
 }
 
+
+TEST(ScoutTest, SpeakTest) {
+    Scout scout("Optimus");
+    std::ostringstream buffer; 
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
+    scout.speak();
+    std::cout.rdbuf(oldCoutBuffer);
+    EXPECT_EQ(buffer.str(), "method 'speak' from Scout\n");
+}
+
+TEST(ScoutTest, ScreamTest) {
+    Scout scout("Optimus");
+    std::ostringstream buffer; 
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
+    scout.scream();
+    std::cout.rdbuf(oldCoutBuffer);
+    EXPECT_EQ(buffer.str(), "method 'scream' from Scout\n");
+}
+
+TEST(ScoutTest, FireTest) {
+    Scout scout("Optimus");
+    std::ostringstream buffer; 
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
+    scout.fire();
+    std::cout.rdbuf(oldCoutBuffer);
+    EXPECT_EQ(buffer.str(), "method 'fire' from Scout\n");
+}
+
+//Output
+TEST(ScoutTest, OutputTest) {
+    Scout scout("Optimus");
+    std::ostringstream buffer; 
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
+    std::cout << scout;
+    std::cout.rdbuf(oldCoutBuffer);
+    EXPECT_EQ(buffer.str(), "Scout Optimus\nHealth: 50\nEnergy: 100\nTransform status: 0\nWeapon: 30\nSpark core: undefined\nSpeed: 85\nCloak level: 5\nScan range: 30\n");
+}
+
