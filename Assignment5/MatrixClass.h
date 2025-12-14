@@ -19,20 +19,23 @@ class MatrixClass {
     public:
         // Constructor
         MatrixClass(std::size_t rows, std::size_t cols): _rows(rows), _cols(cols) {
-            if (rows == 0 || cols == 0) {
+            if (_rows == 0 || _cols == 0) {
                 throw std::invalid_argument("Matrix dimensions must be positive");
             }
-            _data.resize(rows, std::vector<T>(cols, T()));
+            if (_rows > 0 && _cols > 0) {
+                _data.resize(_rows, std::vector<T>(_cols, T()));
+            }
+            
         };
 
         MatrixClass(std::size_t rows, std::size_t cols, const std::vector<std::vector<T>> data): _rows(rows), _cols(cols) {
             if (rows == 0 || cols == 0) {
                 throw std::invalid_argument("Matrix dimensions must be positive");
             }
-            if (data.size() != rows || (rows > 0 && data[0].size() != cols)) {
+            else if (data.size() != rows || (rows > 0 && data[0].size() != cols)) {
                 throw std::invalid_argument("Invalid initializer dimensions");
             }
-            _data = data;
+            else _data = data;
         };
 
         ~MatrixClass(){}; // Destructor
