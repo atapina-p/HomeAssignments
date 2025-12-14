@@ -97,6 +97,24 @@ TEST(IntMatrixTest, Transpose) {
     EXPECT_EQ(t(2, 1), 6);
 }
 
+TEST(IntMatrixTest, Equality) {
+    MatrixClass<int> A(2, 2);
+    A(0, 0) = 1; A(0, 1) = 2;
+    A(1, 0) = 3; A(1, 1) = 4;
+    
+    MatrixClass<int> B(2, 2);
+    B(0, 0) = 1; B(0, 1) = 2;
+    B(1, 0) = 3; B(1, 1) = 4;
+    
+    MatrixClass<int> C(2, 2);
+    C(0, 0) = 1; C(0, 1) = 2;
+    C(1, 0) = 3; C(1, 1) = 5;
+    
+    EXPECT_TRUE(A == B);
+    EXPECT_FALSE(A == C);
+    EXPECT_TRUE(A != C);
+}
+
 TEST(IntMatrixTest, InvalidOperations) {
     MatrixClass<int> A(2, 3);
     MatrixClass<int> B(3, 2);
@@ -164,9 +182,12 @@ TEST(DoubleMatrixTest, TransposeAndEquality) {
     EXPECT_DOUBLE_EQ(B(0, 0), 1.1);
     EXPECT_DOUBLE_EQ(B(1, 0), 2.2);
     EXPECT_DOUBLE_EQ(B(2, 1), 6.6);
+
+    MatrixClass<double> C = B.transpose();
+    EXPECT_TRUE(A == C);
 }
 
-// tests for rational numbers
+// tests for rational numbers class
 
 TEST(RationalTest, ConstructorAndNormalization) {
     Rational r1(3, 4);
@@ -225,8 +246,107 @@ TEST(RationalTest, ArithmeticOperations) {
     EXPECT_THROW(a / zero, std::runtime_error);
 }
 
+TEST(RationalTest, EqualityOperator) {
+    Rational a(1, 2);
+    Rational b(2, 4);
+    Rational c(1, 3);
+    
+    EXPECT_TRUE(a == b);
+    EXPECT_TRUE(a != c);
+}
 
+// tests for rational type
 
+TEST(RationalMatrixTest, MatrixOperationsWithRational) {
+    MatrixClass<Rational> A(2, 2);
+    A(0, 0) = Rational(1, 2); A(0, 1) = Rational(1, 3);
+    A(1, 0) = Rational(2, 3); A(1, 1) = Rational(3, 4);
+    
+    MatrixClass<Rational> B(2, 2);
+    B(0, 0) = Rational(1, 4); B(0, 1) = Rational(1, 5);
+    B(1, 0) = Rational(1, 6); B(1, 1) = Rational(1, 7);
+    
+
+    MatrixClass<Rational> C = A + B;
+    EXPECT_EQ(C(0, 0), Rational(3, 4));  
+    EXPECT_EQ(C(0, 1), Rational(8, 15)); 
+    EXPECT_TRUE(C(0, 0).isNormalized());
+    EXPECT_TRUE(C(0, 1).isNormalized());
+    
+
+    MatrixClass<Rational> D = A * Rational(2);
+    EXPECT_EQ(D(0, 0), Rational(1, 1));  
+    EXPECT_EQ(D(1, 1), Rational(3, 2));  
+    
+
+    MatrixClass<Rational> E(2, 1);
+    E(0, 0) = Rational(1, 2);
+    E(1, 0) = Rational(2, 3);
+    
+    MatrixClass<Rational> F = A * E;
+    EXPECT_EQ(F.getRows(), 2);
+    EXPECT_EQ(F.getCols(), 1);
+    EXPECT_EQ(F(0, 0), Rational(17, 36));
+    EXPECT_EQ(F(1, 0), Rational(5, 6));
+    
+    // Checking invariance
+    for (int i = 0; i < F.getRows(); ++i) {
+        for (int j = 0; j < F.getCols(); ++j) {
+            EXPECT_TRUE(F(i, j).isNormalized());
+        }
+    }
+}
+
+TEST(RationalMatrixTest, TransposeAndEquality) {
+    MatrixClass<Rational> A(2, 3);
+    A(0, 0) = Rational(1, 2); A(0, 1) = Rational(1, 3); A(0, 2) = Rational(1, 4);
+    A(1, 0) = Rational(2, 3); A(1, 1) = Rational(3, 4); A(1, 2) = Rational(4, 5);
+    
+    MatrixClass<Rational> B = A.transpose();
+    EXPECT_EQ(B.getRows(), 3);
+    EXPECT_EQ(B.getCols(), 2);
+    EXPECT_EQ(B(0, 0), Rational(1, 2));
+    EXPECT_EQ(B(1, 0), Rational(1, 3));
+    EXPECT_EQ(B(2, 1), Rational(4, 5));
+    
+    // Checking invariance
+    for (int i = 0; i < B.getRows(); ++i) {
+        for (int j = 0; j < B.getCols(); ++j) {
+            EXPECT_TRUE(B(i, j).isNormalized());
+        }
+    }
+    
+    MatrixClass<Rational> C = B.transpose();
+    EXPECT_TRUE(A == C);
+}
+
+TEST(RationalMatrixTest, ComplexOperations) {
+    // Test: (A + B) * C == A*C + B*C
+    MatrixClass<Rational> A(2, 2);
+    A(0, 0) = Rational(1, 2); A(0, 1) = Rational(1, 3);
+    A(1, 0) = Rational(2, 3); A(1, 1) = Rational(3, 4);
+    
+    MatrixClass<Rational> B(2, 2);
+    B(0, 0) = Rational(1, 4); B(0, 1) = Rational(1, 5);
+    B(1, 0) = Rational(1, 6); B(1, 1) = Rational(1, 7);
+    
+    MatrixClass<Rational> C(2, 2);
+    C(0, 0) = Rational(2, 1); C(0, 1) = Rational(1, 2);
+    C(1, 0) = Rational(1, 3); C(1, 1) = Rational(3, 1);
+    
+    MatrixClass<Rational> left = (A + B) * C;
+    MatrixClass<Rational> right = A * C + B * C;
+    
+    EXPECT_TRUE(left == right);
+    
+    // Checking invariance
+    for (int i = 0; i < left.getRows(); ++i) {
+        for (int j = 0; j < left.getCols(); ++j) {
+            EXPECT_TRUE(left(i, j).isNormalized());
+            EXPECT_TRUE(right(i, j).isNormalized());
+        }
+    }
+}
 
 
 int main(int argc, char **argv) {

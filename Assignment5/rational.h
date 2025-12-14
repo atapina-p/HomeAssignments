@@ -39,6 +39,7 @@ public:
     Rational(int num, int den) : numerator(num), denominator(den) {
         normalize();
     }
+    ~Rational(){}; // Destructor
     
     // Getters
     int getNumerator() const { return numerator; }
@@ -98,6 +99,14 @@ public:
     Rational& operator/=(const Rational& other) {
         *this = *this / other;
         return *this;
+    }
+
+    bool operator==(const Rational& other) const {
+        return numerator == other.numerator && denominator == other.denominator;
+    }
+
+    bool operator!=(const Rational& other) const {
+        return !(*this == other);
     }
     
     double toDouble() const {

@@ -142,6 +142,26 @@ class MatrixClass {
             }
             return result;
         }
+
+        // Equality
+        bool operator==(const MatrixClass<T>& other) const {
+            if (_rows != other._rows || _cols != other._cols) {
+                return false;
+            }
+            
+            for (std::size_t i = 0; i < _rows; ++i) {
+                for (std::size_t j = 0; j < _cols; ++j) {
+                    if (_data[i][j] != other(i, j)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        bool operator!=(const MatrixClass<T>& other) const {
+            return !(*this == other);
+        }
     private:
         std::vector<std::vector<T>> _data;
         std::size_t _rows;
