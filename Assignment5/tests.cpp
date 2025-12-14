@@ -5,8 +5,12 @@
 */
 
 #include "MatrixClass.h"
+#include "rational.h"
 #include <gtest/gtest.h>
 #include <vector>
+
+
+// tests for int type
 
 TEST(IntMatrixTest, ConstructorAndAccess) {
     MatrixClass<int> m(2, 3);
@@ -112,6 +116,117 @@ TEST(IntMatrixTest, InvalidOperations) {
     EXPECT_THROW(MatrixClass<int>(0, 5), std::invalid_argument);
     EXPECT_THROW(MatrixClass<int>(1, 0), std::invalid_argument);
 }
+
+// tests for double type
+
+TEST(DoubleMatrixTest, BasicOperations) {
+    MatrixClass<double> A(2, 2);
+    A(0, 0) = 1.5; A(0, 1) = 2.5;
+    A(1, 0) = 3.5; A(1, 1) = 4.5;
+    
+    MatrixClass<double> B(2, 2);
+    B(0, 0) = 0.5; B(0, 1) = 1.5;
+    B(1, 0) = 2.5; B(1, 1) = 3.5;
+    
+    MatrixClass<double> C = A + B;
+    EXPECT_DOUBLE_EQ(C(0, 0), 2.0);
+    EXPECT_DOUBLE_EQ(C(0, 1), 4.0);
+    EXPECT_DOUBLE_EQ(C(1, 0), 6.0);
+    EXPECT_DOUBLE_EQ(C(1, 1), 8.0);
+    
+    MatrixClass<double> D = A * 2.0;
+    EXPECT_DOUBLE_EQ(D(0, 0), 3.0);
+    EXPECT_DOUBLE_EQ(D(1, 1), 9.0);
+}
+
+TEST(DoubleMatrixTest, MatrixMultiplicationPrecision) {
+    MatrixClass<double> A(2, 2);
+    A(0, 0) = 0.1; A(0, 1) = 0.2;
+    A(1, 0) = 0.3; A(1, 1) = 0.4;
+    
+    MatrixClass<double> B(2, 2);
+    B(0, 0) = 0.5; B(0, 1) = 0.6;
+    B(1, 0) = 0.7; B(1, 1) = 0.8;
+    
+    MatrixClass<double> C = A * B;
+    EXPECT_NEAR(C(0, 0), 0.19, 1e-10); 
+    EXPECT_NEAR(C(0, 1), 0.22, 1e-10); 
+    EXPECT_NEAR(C(1, 0), 0.43, 1e-10); 
+    EXPECT_NEAR(C(1, 1), 0.50, 1e-10); 
+}
+
+TEST(DoubleMatrixTest, TransposeAndEquality) {
+    MatrixClass<double> A(2, 3);
+    A(0, 0) = 1.1; A(0, 1) = 2.2; A(0, 2) = 3.3;
+    A(1, 0) = 4.4; A(1, 1) = 5.5; A(1, 2) = 6.6;
+    
+    MatrixClass<double> B = A.transpose();
+    EXPECT_DOUBLE_EQ(B(0, 0), 1.1);
+    EXPECT_DOUBLE_EQ(B(1, 0), 2.2);
+    EXPECT_DOUBLE_EQ(B(2, 1), 6.6);
+}
+
+// tests for rational numbers
+
+TEST(RationalTest, ConstructorAndNormalization) {
+    Rational r1(3, 4);
+    EXPECT_EQ(r1.getNumerator(), 3);
+    EXPECT_EQ(r1.getDenominator(), 4);
+    EXPECT_TRUE(r1.isNormalized());
+    
+    Rational r2(6, 8);
+    EXPECT_EQ(r2.getNumerator(), 3);
+    EXPECT_EQ(r2.getDenominator(), 4);
+    EXPECT_TRUE(r2.isNormalized());
+    
+    Rational r3(-2, 3);
+    EXPECT_EQ(r3.getNumerator(), -2);
+    EXPECT_EQ(r3.getDenominator(), 3);
+    EXPECT_TRUE(r3.isNormalized());
+    
+    Rational r4(2, -3);
+    EXPECT_EQ(r4.getNumerator(), -2);
+    EXPECT_EQ(r4.getDenominator(), 3);
+    EXPECT_TRUE(r4.isNormalized());
+    
+    Rational r5(0, 5);  // 0/5 = 0/1
+    EXPECT_EQ(r5.getNumerator(), 0);
+    EXPECT_EQ(r5.getDenominator(), 1);
+    EXPECT_TRUE(r5.isNormalized());
+    
+    EXPECT_THROW(Rational(1, 0), std::runtime_error);
+}
+
+TEST(RationalTest, ArithmeticOperations) {
+    Rational a(1, 2);
+    Rational b(1, 3);
+    
+    Rational c = a + b;  
+    EXPECT_EQ(c.getNumerator(), 5);
+    EXPECT_EQ(c.getDenominator(), 6);
+    EXPECT_TRUE(c.isNormalized());
+    
+    Rational d = a - b; 
+    EXPECT_EQ(d.getNumerator(), 1);
+    EXPECT_EQ(d.getDenominator(), 6);
+    EXPECT_TRUE(d.isNormalized());
+    
+    Rational e = a * b;  
+    EXPECT_EQ(e.getNumerator(), 1);
+    EXPECT_EQ(e.getDenominator(), 6);
+    EXPECT_TRUE(e.isNormalized());
+    
+    Rational f = a / b;  
+    EXPECT_EQ(f.getNumerator(), 3);
+    EXPECT_EQ(f.getDenominator(), 2);
+    EXPECT_TRUE(f.isNormalized());
+    
+    Rational zero(0);
+    EXPECT_THROW(a / zero, std::runtime_error);
+}
+
+
+
 
 
 int main(int argc, char **argv) {
