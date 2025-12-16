@@ -1,8 +1,8 @@
 CXX = g++
 CCXFLAGS = -I. -std=c++17 -Wall -g -fPIC
 
-SRC = tests.cpp
-OBJ = tests.o
+SRC = tests.cpp rational.cpp
+OBJ = tests.o rational.o
 
 TARGET = test
 
