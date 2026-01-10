@@ -13,7 +13,20 @@
 class AerialBot: public Transformer {
     public:
         AerialBot(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon, int flightSpeed, int altitude);
+        AerialBot(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon, int flightSpeed);
+        AerialBot(std::string name, int health, int energy, bool isTransformed, PrimaryWeapon* weapon);
+        AerialBot(std::string name, int health, int energy, bool isTransformed);
+        AerialBot(std::string name, int health, int energy);
+        AerialBot(std::string name, int health);
+        AerialBot(std::string name);
 
+        friend std::ostream& operator<<(std::ostream& os, AerialBot& bot);
+
+        bool fire() override;
+        bool scream() override;
+        bool speak() override;
+
+        //methods
         void evasiveManeuvers();
         void bombard();
 

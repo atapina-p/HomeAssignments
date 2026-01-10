@@ -7,6 +7,7 @@
 #include "gtest/gtest.h"
 
 #include "Transformer.h"
+#include "AerialBot.h"
 #include "PrimaryWeapon.h"
 #include "SparkCore.h"
 
@@ -15,12 +16,12 @@
 // SparkCore class test
 TEST(SparkCoreTest, ConstructorGetStatusSpark) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 100, 100, false, &weapon);
+    AerialBot transformer("Optimus", 100, 100, false, &weapon);
     EXPECT_EQ(transformer.getStatusSpark(), "undefined");
 }
 TEST(SparkCoreTest, SetGetStatusSpark) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 100, 100, false, &weapon);
+    AerialBot transformer("Optimus", 100, 100, false, &weapon);
     transformer.setStatusSpark("Damaged");
     EXPECT_EQ(transformer.getStatusSpark(), "Damaged");
 }
@@ -28,87 +29,115 @@ TEST(SparkCoreTest, SetGetStatusSpark) {
 //Transformer class tests
 TEST(TransformerTest, ConstructorGetName) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 100, 100, false, &weapon);
+    AerialBot transformer("Optimus", 100, 100, false, &weapon);
     EXPECT_EQ(transformer.getName(), "Optimus");
 }
 TEST(TransformerTest, SetGetName) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 100, 100, false, &weapon);
+    AerialBot transformer("Optimus", 100, 100, false, &weapon);
     transformer.setName("Vector");
     EXPECT_EQ(transformer.getName(), "Vector");
 }
 
 TEST(TransformerTest, ConstructorGetHealth) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 37, 250, false, &weapon);
+    AerialBot transformer("Optimus", 37, 250, false, &weapon);
     EXPECT_EQ(transformer.getHealth(), 37);
 }
 TEST(TransformerTest, SetGetHealth) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 37, 250, false, &weapon);
+    AerialBot transformer("Optimus", 37, 250, false, &weapon);
     transformer.setHealth(24);
     EXPECT_EQ(transformer.getHealth(), 24);
 }
 
 TEST(TransformerTest, ConstructorGetEnergy) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, false, &weapon);
+    AerialBot transformer("Optimus", 50, 230, false, &weapon);
     EXPECT_EQ(transformer.getEnergy(), 230);
 }
 TEST(TransformerTest, SetGetEnergy) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, false, &weapon);
+    AerialBot transformer("Optimus", 50, 230, false, &weapon);
     transformer.setEnergy(200);
     EXPECT_EQ(transformer.getEnergy(), 200);
 }
 
 TEST(TransformerTest, ConstructorGetIsTransformed) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, false, &weapon);
+    AerialBot transformer("Optimus", 50, 230, false, &weapon);
     EXPECT_FALSE(transformer.getIsTransformed());
 }
 TEST(TransformerTest, SetGetIsTransformed) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, false, &weapon);
+    AerialBot transformer("Optimus", 50, 230, false, &weapon);
     transformer.setIsTransformed(true);
     EXPECT_TRUE(transformer.getIsTransformed());
 }
 
 TEST(TransformerTest, TransformMethod_1) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, false, &weapon);
+    AerialBot transformer("Optimus", 50, 230, false, &weapon);
     transformer.transform();
     EXPECT_TRUE(transformer.getIsTransformed());
 }
 TEST(TransformerTest, TransformMethod_2) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, true, &weapon);
+    AerialBot transformer("Optimus", 50, 230, true, &weapon);
     transformer.transform();
     EXPECT_FALSE(transformer.getIsTransformed());
 }
 
 TEST(TransformerTest, FightMethod_1) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, false, &weapon);
+    AerialBot transformer("Optimus", 50, 230, false, &weapon);
     transformer.fight();
     EXPECT_EQ(transformer.getEnergy(), 220);
 }
 TEST(TransformerTest, FightMethod_2) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 5, true, &weapon);
+    AerialBot transformer("Optimus", 50, 5, true, &weapon);
     transformer.fight();
     EXPECT_EQ(transformer.getEnergy(), 5);
 }
 
+TEST(TransformerTest, VirtualSpeakTest) {
+    Transformer* bot = new AerialBot("Optimus");
+    std::ostringstream buffer; 
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
+    bot->speak();
+    std::cout.rdbuf(oldCoutBuffer);
+    EXPECT_EQ(buffer.str(), "method 'speak' from AerialBot\n");
+}
+
+TEST(TransformerTest, VirtualScreamTest) {
+    Transformer* bot = new AerialBot("Optimus");
+    std::ostringstream buffer; 
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
+    bot->scream();
+    std::cout.rdbuf(oldCoutBuffer);
+    EXPECT_EQ(buffer.str(), "method 'scream' from AerialBot\n");
+}
+
+TEST(AerialBotTest, VirtualFireTest) {
+    Transformer* bot = new AerialBot("Optimus");
+    std::ostringstream buffer; 
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf(buffer.rdbuf());
+    bot->fire();
+    std::cout.rdbuf(oldCoutBuffer);
+    EXPECT_EQ(buffer.str(), "method 'fire' from AerialBot\n");
+}
+
+
 // Primary Weapon tests
 TEST(WeaponTest, ConstructorGetWeapon) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, false, &weapon);
+    AerialBot transformer("Optimus", 50, 230, false, &weapon);
     EXPECT_EQ(transformer.getWeaponInfo()->getDamageInfo(), 25);
 }
 TEST(TransformerTest, SetGetWeapon) {
     PrimaryWeapon weapon(25);
-    Transformer transformer("Optimus", 50, 230, false, &weapon);
+    AerialBot transformer("Optimus", 50, 230, false, &weapon);
     PrimaryWeapon weapon2(37);
     transformer.setWeapon(&weapon2);
     EXPECT_EQ(transformer.getWeaponInfo()->getDamageInfo(), 37);
